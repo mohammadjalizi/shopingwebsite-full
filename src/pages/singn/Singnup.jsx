@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../Navbar/Navbar'
 import { useNavigate } from "react-router-dom";
-
+import {  createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../../Firebase/config'
 const Singnup = () => {
+const[email,setemail]=useState("")
+const[password,Setpassword]=useState("")
   const navigate = useNavigate();
   return (
     <div className='   '>
@@ -76,7 +79,21 @@ navigate("/singin")
               </label>
             </div>
             <div className="relative">
-              <button className="bg-blue-500 text-white rounded-md px-2 py-1">
+              <button  onClick={()=>{
+
+createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
+
+              }} className="bg-blue-500 text-white rounded-md px-2 py-1">
               ادامه
               </button>
             </div>
