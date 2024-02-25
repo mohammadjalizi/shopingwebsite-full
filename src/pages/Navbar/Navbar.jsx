@@ -2,14 +2,16 @@ import React from 'react'
 import { FiShoppingCart } from "react-icons/fi";
 import { FaRegUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../Firebase/config'
 const Navbar = () => {
+  const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
   return (
     <div className='    md:my-5 py-4  md:bg-gradient-to-r from-sky-500 to-indigo-500  '>
   <div className=' md:mx-96 flex justify-between  '>
     
-   
+   {  user && <h3>doneeeeeeee</h3> }
 <div className=' md:hidden '>  menu </div>
 <div>  <h1> shoping</h1>   </div>
 <div  className='   hidden md:flex list-none  gap-7 '> 

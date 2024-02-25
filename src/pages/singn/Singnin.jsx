@@ -1,5 +1,5 @@
 import React from 'react'
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+
 const Singnin = () => {
   return (
     <div>

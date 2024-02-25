@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+
 import Navbar from '../Navbar/Navbar'
 import { useNavigate } from "react-router-dom";
-import {  createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../../Firebase/config'
+
+import { useState } from 'react';
+import { auth } from '../../Firebase/config';
+import { createUserWithEmailAndPassword } from "firebase/auth";
 const Singnup = () => {
-const[email,setemail]=useState("")
-const[password,Setpassword]=useState("")
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
   const navigate = useNavigate();
   return (
     <div className='   '>
@@ -28,26 +30,14 @@ navigate("/singin")
         </div>
         <div className="divide-y divide-gray-200">
           <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-          <div className="relative">
-   
-   <input
-     autoComplete="off"
-     id="email"
-     name="email"
-     type="text"
-     className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-     placeholder="Email address"
-   />
-   <label
-     htmlFor="email"
-     className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-   >
-   نام کاربری
-   </label>
- </div>
+ 
             <div className="relative">
    
-              <input
+              <input 
+              onChange={(eo)=>{
+setemail(eo.target.value)
+
+              }}
                 autoComplete="off"
                 id="email"
                 name="email"
@@ -64,6 +54,10 @@ navigate("/singin")
             </div>
             <div className="relative">
               <input
+              onChange={(eo)=>{
+                setpassword(eo.target.value)
+
+              }}
                 autoComplete="off"
                 id="password"
                 name="password"
@@ -79,23 +73,24 @@ navigate("/singin")
               </label>
             </div>
             <div className="relative">
-              <button  onClick={()=>{
-
-createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed up 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
-
-              }} className="bg-blue-500 text-white rounded-md px-2 py-1">
-              ادامه
-              </button>
+            <button onClick={(eo) => {
+            
+            eo.preventDefault();
+            
+            createUserWithEmailAndPassword(auth, email, password)
+              .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log("doneeeeeeeeee")
+                // ...
+              })
+              .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorMessage)
+                // ..
+              });
+          }}>Sign up</button>
             </div>
           </div>
         </div>
